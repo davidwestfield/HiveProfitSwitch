@@ -1,16 +1,29 @@
 import json
 import requests
 
-# THAT LINK CHANGES EVEYR MINUTE
+# Fetches api data. This link changes every minute
 r = requests.get('https://api.nicehash.com/api?method=simplemultialgo.info')
 data = r.json()
 
-algos = {}
-
+# Sorts paying for each algo into a dictionary
+paying = {}
+speed = {}
 for a in data['result']['simplemultialgo']:
-    algos.update({a['name']:a['paying']})
+    paying.update({a['name']:a['paying']})
+    speed.update({a['name']:0})
 
-print algos
+# EDIT THIS
+# Your speed for each algorithim. Double check units
+
+speed['daggerhashimoto'] = 0.400
+speed['equishash'] = 400
+
+# updates profability based on previous input
+
+print float(paying['daggerhashimoto']) * speed['daggerhashimoto']
+
+
+# fetch usd
 
 
 
