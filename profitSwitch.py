@@ -18,9 +18,12 @@ for a in data['result']['simplemultialgo']:
 speed['daggerhashimoto'] = 0.400
 speed['equishash'] = 400
 
-# updates profability based on previous input
 
-print float(paying['daggerhashimoto']) * speed['daggerhashimoto']
+
+# Prints profability
+for a in paying:
+    profit = float(paying[a]) * speed[a]
+    print("%s: %f btc" % (a, profit))
 
 
 # fetch usd
