@@ -1,5 +1,6 @@
 import json
 import requests
+from operator import itemgetter
 
 # Fetches api data. This link changes every minute
 r = requests.get('https://api.nicehash.com/api?method=simplemultialgo.info')
@@ -9,36 +10,28 @@ data = r.json()
 paying = {}
 speed = {}
 for a in data['result']['simplemultialgo']:
-    paying.update({a['name']:a['paying']})
-    speed.update({a['name']:0})
+    paying.update({a['name']: a['paying']})
+    speed.update({a['name']: 0})
 
-# EDIT THIS
+# EDIT THIS (Later it will fetch machine hashrate)
 # Your speed for each algorithim. Double check units
-
-speed['daggerhashimoto'] = 0.400
-speed['equishash'] = 400
-
+speed['daggerhashimoto'] = 0.186
+speed['equihash'] = 0.00000258
 
 
-# Prints profability
+# Finds and sorts profability
+profability = {}
 for a in paying:
-    profit = float(paying[a]) * speed[a]
-    print("%s: %f btc" % (a, profit))
+    profit = round(float(paying[a]) * speed[a], 5)
+    if profit > 0:
+        profability.update({a: profit})
+sortedProfit = sorted(profability.items(), key=lambda x: x[1], reverse=True)
+
+# Prints results
+for x in sortedProfit:
+    print x[0], x[1], "btc"
 
 
 # fetch usd
 
-
-
-# get machine hashrate for reasonable algorithims
-
-# multiple our hashrates by those
-
-# sort results
-
-# siwtch miner to whichever one is best
-
-# run this on a curl script
-
-
-# todo: change to average over time
+# switch miner
