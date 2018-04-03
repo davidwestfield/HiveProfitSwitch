@@ -18,7 +18,6 @@ for a in data['result']['simplemultialgo']:
 speed['daggerhashimoto'] = 0.186
 speed['equihash'] = 0.00000258
 
-
 # Finds and sorts profability
 profability = {}
 for a in paying:
